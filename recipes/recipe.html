@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script defer src="../assets/recipeViewer.js"></script>
+  </head>
+  <body>
+    <recipe-viewer></recipe-viewer>
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
+      document.querySelector("recipe-viewer").setAttribute("data-index", id);
+    </script>
+  </body>
+</html>

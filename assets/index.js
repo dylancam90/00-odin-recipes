@@ -1,4 +1,10 @@
+// Remove this when you are done
+// import { Cache } from "./cache.js";
+
 const URL = "https://www.themealdb.com/api/json/v1/1/random.php";
+
+const recipeCache = new Cache();
+console.log("initialized cache: ", recipeCache);
 
 async function requestRecipe() {
   try {
@@ -10,7 +16,7 @@ async function requestRecipe() {
       );
     }
 
-    const json = response.json();
+    const json = await response.json();
     return json;
   } catch (error) {
     console.error(
@@ -23,7 +29,7 @@ async function requestRecipe() {
 // Remove empty feilds from object
 async function sanatizeMeal(meal) {
   for (let [key, value] of Object.entries(meal)) {
-    if (value === "" || value === null) {
+    if (value === "" || value === " " || value === null) {
       delete meal[key];
     }
   }
@@ -55,8 +61,16 @@ async function getRecipes(recipeNum = 3) {
 
 async function main() {
   try {
-    const recipes = await getRecipes(1);
-    console.log(recipes[0]);
+    let cachedRecipes = recipeCache.getData();
+
+    // If no cached recipes make a request for them and cache them
+    if (!cachedRecipes) {
+      console.log("No cached results, retrieving more...");
+      const recipes = await getRecipes(3);
+      recipeCache.setData(recipes);
+      cachedRecipes = recipes;
+      console.log(cachedRecipes[0].idMeal);
+    }
   } catch (error) {
     console.error("Unexpected error in main:", error.message);
   }
