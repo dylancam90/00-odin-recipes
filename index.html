@@ -7,12 +7,19 @@
     <!-- <script defer type="module" src="./assets/cache.js"></script> -->
     <!-- LOCAL -->
     <script defer src="./assets/cache.js"></script>
+    <script defer src="./assets/queryRecipes.js"></script>
     <script defer src="./assets/index.js"></script>
-    <script defer src="./assets/recipeViewer.js"></script>
+    <script defer src="./assets/components/recipeViewer.js"></script>
     <title>Odin Recipes</title>
+    <style>
+      .links-container a {
+        display: flex;
+      }
+    </style>
   </head>
   <body>
     <h1>Odin Recipes</h1>
-    <a href="recipes/recipe.html?id=0">Recipe 1</a>
+    <div class="links-container"></div>
+    <!-- <a href="recipes/recipe.html?id=0">Recipe 1</a> -->
   </body>
 </html>
