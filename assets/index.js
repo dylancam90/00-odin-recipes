@@ -6,7 +6,7 @@ const linksContainer = document.querySelector(".links-container");
 // Create the links and append them to the document
 function createLinks() {
   // DEBUG
-  console.log(recipes[0]);
+  console.log(recipes);
 
   if (!isEmpty(recipes)) {
     recipes.forEach((recipe, index) => {
