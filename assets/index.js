@@ -1,25 +1,3 @@
-// // Query recipes from localStorage
-// const recipes = JSON.parse(localStorage.getItem("recipes"));
-// // Select the links container
-// const linksContainer = document.querySelector("#recipes");
-
-// // Create the links and append them to the document
-// function createLinks() {
-//   // DEBUG
-//   console.log(recipes);
-
-//   if (!isEmpty(recipes)) {
-//     recipes.forEach((recipe, index) => {
-//       const recipeLink = document.createElement("a");
-//       recipeLink.href = `recipes/recipe.html?id=${index}`;
-//       recipeLink.textContent = recipe?.strMeal;
-//       linksContainer.appendChild(recipeLink);
-//     });
-//   } else {
-//     // Handle event where localStorage is empty
-//   }
-// }
-
 const recipes = JSON.parse(localStorage.getItem("recipes"));
 const cardContainer = document.querySelector("#recipes");
 
@@ -39,5 +17,18 @@ function createLinks() {
 function isEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
+
+const button = document.querySelector("#refresh-recipes");
+
+button.addEventListener("click", async () => {
+  // Defined in queryRecipes.js
+  recipeCache.clearCache();
+
+  const newRecipes = await getRecipes(3);
+  recipeCache.setData(newRecipes);
+
+  // Manually reload window
+  location.reload();
+});
 
 createLinks();

@@ -1,6 +1,7 @@
 // remove the "export class Cache" and uncomment the window.Cache when your done
+// 300000
 class Cache {
-  constructor(duration = 30000) {
+  constructor(duration = 300000) {
     this.duration = duration;
   }
 
@@ -19,6 +20,7 @@ class Cache {
 
   // If timestamp is good return data, else return null
   getData() {
+    if (!this.isValid()) return null;
     const json = localStorage.getItem("recipes");
     return json ? JSON.parse(json) : null;
   }

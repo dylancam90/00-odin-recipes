@@ -70,6 +70,8 @@ async function main() {
       recipeCache.setData(recipes);
       cachedRecipes = recipes;
       console.log(cachedRecipes[0].idMeal);
+    } else {
+      console.log("There are recipes cached already");
     }
   } catch (error) {
     console.error("Unexpected error in main:", error.message);
