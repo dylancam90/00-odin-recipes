@@ -18,17 +18,17 @@ function isEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
 
-const button = document.querySelector("#refresh-recipes");
+// const button = document.querySelector("#refresh-recipes");
 
-button.addEventListener("click", async () => {
-  // Defined in queryRecipes.js
-  recipeCache.clearCache();
+// button.addEventListener("click", async () => {
+//   // Defined in queryRecipes.js
+//   recipeCache.clearCache();
 
-  const newRecipes = await getRecipes(3);
-  recipeCache.setData(newRecipes);
+//   const newRecipes = await getRecipes(3);
+//   recipeCache.setData(newRecipes);
 
-  // Manually reload window
-  location.reload();
-});
+//   // Manually reload window
+//   location.reload();
+// });
 
 createLinks();

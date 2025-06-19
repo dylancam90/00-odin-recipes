@@ -3,17 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="../assets/components/recipeViewer.js"></script>
+
+    <script type="module" defer src="../assets/components/navbar.js"></script>
+
     <title>Recipe</title>
   </head>
   <body>
+    <recipe-navbar></recipe-navbar>
     <recipe-viewer></recipe-viewer>
   </body>
-  <script>
-    /* DEBUG */
-    // const params = new URLSearchParams(window.location.search);
-    // const id = params.get("id");
-    // const recipe = JSON.parse(localStorage.getItem("recipes"))?.[id];
-    // console.log(recipe);
-  </script>
 </html>

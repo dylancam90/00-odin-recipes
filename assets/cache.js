@@ -1,6 +1,6 @@
 // remove the "export class Cache" and uncomment the window.Cache when your done
 // 300000
-class Cache {
+export class Cache {
   constructor(duration = 300000) {
     this.duration = duration;
   }
@@ -37,6 +37,3 @@ class Cache {
     localStorage.removeItem("recipes_timestamp");
   }
 }
-
-/* For prod */
-// window.Cache = Cache;

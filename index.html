@@ -3,14 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- MODULE -->
-    <!-- <script defer type="module" src="./assets/cache.js"></script> -->
-    <!-- LOCAL -->
-    <script defer src="./assets/cache.js"></script>
-    <script defer src="./assets/queryRecipes.js"></script>
     <script defer src="./assets/index.js"></script>
+    <!-- MODULE -->
+    <script type="module" defer src="./assets/queryRecipes.js"></script>
+    <!-- Components -->
     <script defer src="./assets/components/recipeViewer.js"></script>
     <script defer src="./assets/components/recipeCard.js"></script>
+    <script type="module" defer src="./assets/components/navbar.js"></script>
+
     <title>Odin Recipes</title>
     <style>
       #recipes a {
@@ -19,14 +19,15 @@
     </style>
   </head>
   <body>
-    <nav>
+    <recipe-navbar></recipe-navbar>
+    <!-- <nav>
       <h1>Odin Recipes</h1>
       <ul>
         <li><a href="./index.html">Home</a></li>
         <li><a href="./about.html">About</a></li>
       </ul>
       <button id="refresh-recipes">Refresh recipes</button>
-    </nav>
+    </nav> -->
     <article>
       <!-- <div id="recipes"></div> -->
       <!-- Container for recipes -->
@@ -36,8 +37,8 @@
         <h1>TODO -------------------------------------</h1>
         <ol>
           <li>
-            Add a navbar web component so the refresh button and the home button
-            can be used from anywhere
+            You may want to refine the navbar a little bit a find a better way
+            to calculate the path to different pages
           </li>
           <li>Styles also need to be added</li>
         </ol>

@@ -1,14 +1,16 @@
 const template = document.createElement("template");
+/* 
+      <nav>
+      <h1>Odin Recipes</h1>
+      <ul>
+        <li><a href="./index.html">Home</a></li>
+        <li><a href="./about.html">About</a></li>
+      </ul>
+      <button id="refresh-recipes">Refresh recipes</button>
+    </nav>
+
+*/
 template.innerHTML = `
-
-  <nav>
-    <h1>Odin Recipes</h1>
-    <div class="links">
-      <a href="../index.html">Go Home</a>
-      <button type="button" id="reset-recipes">Reset Recipes</button>
-    </div>
-  </nav>
-
   <header>
     <h2>Name: <span id="recipe-name"></span></h2>
     <h3>Origin:
@@ -79,15 +81,6 @@ class RecipeViewer extends HTMLElement {
 
     // Create video element
     this.createVideoElement(recipe);
-
-    // Reset recipes button
-    const resetRecipes = this.querySelector("#reset-recipes");
-    resetRecipes.addEventListener("click", (e) => {
-      // TODO
-      console.log(
-        "TODO: queryRecipes.js file is already linked. You just need to call the resetRecipes() function here to purge recipes and timestamps from localhost and query a new batch"
-      );
-    });
 
     /* DEBUG */
     console.log(recipe);

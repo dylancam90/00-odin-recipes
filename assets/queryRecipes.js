@@ -1,14 +1,13 @@
-// Remove this when you are done
-// import { Cache } from "./cache.js";
+import { Cache } from "./cache.js";
 
-const URL = "https://www.themealdb.com/api/json/v1/1/random.php";
+const API_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
 
 const recipeCache = new Cache();
 console.log("initialized cache: ", recipeCache);
 
 async function requestRecipe() {
   try {
-    const response = await fetch(URL);
+    const response = await fetch(API_URL);
 
     if (!response.ok) {
       throw new Error(
@@ -79,3 +78,5 @@ async function main() {
 }
 
 main();
+
+export { recipeCache, getRecipes };
