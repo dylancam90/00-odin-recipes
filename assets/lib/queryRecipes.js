@@ -1,8 +1,17 @@
 import { Cache } from "./cache.js";
+import { getConfig } from "./loadConfig.js";
 
 const API_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
 
-const recipeCache = new Cache();
+/* 
+  STILL TRYING TO GET THIS TO WORK 
+
+  It works for recipe-viewer but not for index.html 
+*/
+const config = await getConfig("../assets/config.json");
+console.log(config);
+
+const recipeCache = new Cache(config?.recipeRefreshIntervalMs);
 console.log("initialized cache: ", recipeCache);
 
 async function requestRecipe() {
@@ -65,7 +74,7 @@ async function main() {
     // If no cached recipes make a request for them and cache them
     if (!cachedRecipes) {
       console.log("No cached results, retrieving more...");
-      const recipes = await getRecipes(3);
+      const recipes = await getRecipes(config?.recipeNum);
       recipeCache.setData(recipes);
       cachedRecipes = recipes;
       console.log(cachedRecipes[0].idMeal);

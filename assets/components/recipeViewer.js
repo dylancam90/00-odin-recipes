@@ -128,17 +128,15 @@ class RecipeViewer extends HTMLElement {
     }
   }
 
-  createVideoElement(recipe) {
+  async createVideoElement(recipe) {
     const VIDEO_WIDTH = 580;
     const VIDEO_HEIGHT = 315;
 
     const ytVideo = recipe?.strYoutube;
-    const vidoeContainer = this.querySelector(".video-container");
+    const videoContainer = this.querySelector(".video-container");
 
     if (!ytVideo) {
-      const videoErrMessage = document.createElement("p");
-      videoErrMessage.textContent = `No video found for ${recipe?.strMeal}`;
-      vidoeContainer?.appendChild(videoErrMessage);
+      this.#createVideoErrorMessage(videoContainer, recipe?.strMeal);
       return;
     }
 
@@ -152,6 +150,16 @@ class RecipeViewer extends HTMLElement {
     const videoId = new URL(ytVideo).searchParams.get("v");
     const embedUrl = `https://www.youtube.com/embed/${videoId}`;
 
+    const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+
+    // Check if thumbnail loads (will fail if video is deleted)
+    const thumbOk = await this.#checkThumbnail(thumbnailUrl);
+
+    if (!thumbOk) {
+      this.#createVideoErrorMessage(videoContainer, recipe?.strMeal);
+      return;
+    }
+
     const iframe = document.createElement("iframe");
     iframe.width = VIDEO_WIDTH.toLocaleString();
     iframe.height = VIDEO_HEIGHT.toLocaleString();
@@ -162,7 +170,30 @@ class RecipeViewer extends HTMLElement {
       "accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share";
     iframe.allowFullscreen = true;
 
-    vidoeContainer.appendChild(iframe);
+    videoContainer.appendChild(iframe);
+  }
+
+  #checkThumbnail(thumbnailUrl) {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        // YouTube returns a generic image (120x90 px) when the video doesn't exist
+        const isPlaceholder = img.width === 120 && img.height === 90;
+        resolve(!isPlaceholder);
+      };
+      img.onerror = () => resolve(false); // Network error / bad image
+      img.src = thumbnailUrl;
+    });
+  }
+
+  #createVideoErrorMessage(videoContainer, meal) {
+    if (videoContainer) {
+      console.log("CONTAINER BAD");
+      const videoErrMessage = document.createElement("p");
+      videoErrMessage.textContent = `Video appears to be unavailable or deleted for ${meal}`;
+      videoContainer?.appendChild(videoErrMessage);
+      return;
+    }
   }
 }
 

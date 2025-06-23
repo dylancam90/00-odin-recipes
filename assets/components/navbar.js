@@ -1,4 +1,4 @@
-import { recipeCache, getRecipes } from "../queryRecipes.js";
+import { recipeCache, getRecipes } from "../lib/queryRecipes.js";
 
 const navTemplate = document.createElement("template");
 navTemplate.innerHTML = `
@@ -17,20 +17,16 @@ class RecipeNavbar extends HTMLElement {
     super();
   }
 
-  connectedCallback() {
+  async connectedCallback() {
     console.log("connected");
     const content = navTemplate.content.cloneNode(true);
     this.append(content);
 
     const path = "/projects/00-odin-recipes/";
-    const home = document.getElementById("home");
-    const about = document.getElementById("about");
-
-    home.href = path + "index.html";
-    about.href = path + "about.html";
+    this.querySelector("#home").href = path + "index.html";
+    this.querySelector("#about").href = path + "about.html";
 
     const button = document.querySelector("#refresh-recipes");
-
     button.addEventListener("click", async () => {
       // Defined in queryRecipes.js
       recipeCache.clearCache();

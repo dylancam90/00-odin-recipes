@@ -18,17 +18,4 @@ function isEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
 
-// const button = document.querySelector("#refresh-recipes");
-
-// button.addEventListener("click", async () => {
-//   // Defined in queryRecipes.js
-//   recipeCache.clearCache();
-
-//   const newRecipes = await getRecipes(3);
-//   recipeCache.setData(newRecipes);
-
-//   // Manually reload window
-//   location.reload();
-// });
-
 createLinks();
