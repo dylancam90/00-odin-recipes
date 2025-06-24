@@ -1,5 +1,7 @@
 export async function getConfig(path) {
+  console.log(window.location.href);
   try {
+    console.log("RUNNING");
     const response = await fetch(path);
     console.log(response);
     const json = await response.json();

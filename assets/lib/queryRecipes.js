@@ -1,14 +1,10 @@
 import { Cache } from "./cache.js";
 import { getConfig } from "./loadConfig.js";
 
+const ROOT_PATH = "http://localhost:5500/projects/00-odin-recipes/";
 const API_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
 
-/* 
-  STILL TRYING TO GET THIS TO WORK 
-
-  It works for recipe-viewer but not for index.html 
-*/
-const config = await getConfig("../assets/config.json");
+const config = await getConfig(ROOT_PATH + "assets/config.json");
 console.log(config);
 
 const recipeCache = new Cache(config?.recipeRefreshIntervalMs);
@@ -88,4 +84,4 @@ async function main() {
 
 main();
 
-export { recipeCache, getRecipes };
+export { recipeCache, getRecipes, ROOT_PATH };
