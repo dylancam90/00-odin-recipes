@@ -1,14 +1,14 @@
 import { Cache } from "./cache.js";
-import { getConfig } from "./loadConfig.js";
+import { loadConfig } from "./loadConfig.js";
 
 const ROOT_PATH = "http://localhost:5500/projects/00-odin-recipes/";
 const API_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
 
-const config = await getConfig(ROOT_PATH + "assets/config.json");
-console.log(config);
+const config = await loadConfig(ROOT_PATH + "assets/config.json");
+console.log("Config options: ", config);
 
 const recipeCache = new Cache(config?.recipeRefreshIntervalMs);
-console.log("initialized cache: ", recipeCache);
+// console.log("initialized cache: ", recipeCache);
 
 async function requestRecipe() {
   try {
@@ -73,7 +73,6 @@ async function main() {
       const recipes = await getRecipes(config?.recipeNum);
       recipeCache.setData(recipes);
       cachedRecipes = recipes;
-      console.log(cachedRecipes[0].idMeal);
     } else {
       console.log("There are recipes cached already");
     }

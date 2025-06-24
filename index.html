@@ -9,7 +9,11 @@
     <!-- Components -->
     <script defer src="./assets/components/recipeViewer.js"></script>
     <script defer src="./assets/components/recipeCard.js"></script>
-    <script type="module" defer src="./assets/components/navbar.js"></script>
+    <script
+      type="module"
+      defer
+      src="./assets/components/recipeNavbar.js"
+    ></script>
 
     <title>Odin Recipes</title>
     <style>
@@ -20,25 +24,16 @@
   </head>
   <body>
     <recipe-navbar></recipe-navbar>
-    <!-- <nav>
-      <h1>Odin Recipes</h1>
-      <ul>
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./about.html">About</a></li>
-      </ul>
-      <button id="refresh-recipes">Refresh recipes</button>
-    </nav> -->
     <article>
-      <!-- <div id="recipes"></div> -->
-      <!-- Container for recipes -->
       <section id="recipes"></section>
 
       <section class="todo">
         <h1>TODO -------------------------------------</h1>
         <ol>
           <li>
-            Incorporate a config file for easier configuration without having to
-            dig through code
+            Add pagination links at the bottom of the page so if you wanted to
+            view the next recipe you dont need to naviagte home and look for the
+            next one
           </li>
           <li>Styles also need to be added</li>
         </ol>

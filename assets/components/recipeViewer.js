@@ -1,15 +1,4 @@
 const template = document.createElement("template");
-/* 
-      <nav>
-      <h1>Odin Recipes</h1>
-      <ul>
-        <li><a href="./index.html">Home</a></li>
-        <li><a href="./about.html">About</a></li>
-      </ul>
-      <button id="refresh-recipes">Refresh recipes</button>
-    </nav>
-
-*/
 template.innerHTML = `
   <header>
     <h2>Name: <span id="recipe-name"></span></h2>

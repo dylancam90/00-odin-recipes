@@ -1,9 +1,7 @@
-export async function getConfig(path) {
-  console.log(window.location.href);
+// Used to load config.json into queryRecipes.js making it easier to change main functionality without digging through code
+export async function loadConfig(path) {
   try {
-    console.log("RUNNING");
     const response = await fetch(path);
-    console.log(response);
     const json = await response.json();
     return json;
   } catch (error) {

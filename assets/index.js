@@ -2,7 +2,7 @@ const recipes = JSON.parse(localStorage.getItem("recipes"));
 const cardContainer = document.querySelector("#recipes");
 
 function createLinks() {
-  console.log(recipes);
+  // console.log(recipes);
   if (!isEmpty(recipes)) {
     recipes.forEach((recipe, index) => {
       const recipeCard = document.createElement("recipe-card");
