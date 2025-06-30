@@ -5,8 +5,8 @@ navTemplate.innerHTML = `
   <nav>
     <h1>Odin Recipes</h1>
     <ul>
-      <li><a id="home" href="/index.html">Home</a></li>
-      <li><a id="about" href="/about.html">About</a></li>
+      <li><a id="home" href=${ROOT_PATH + "index.html"}>Home</a></li>
+      <li><a id="about" href=${ROOT_PATH + "index.html"}>About</a></li>
     </ul>
     <button id="refresh-recipes">Refresh recipes</button>
   </nav>
@@ -20,9 +20,6 @@ class RecipeNavbar extends HTMLElement {
   async connectedCallback() {
     const content = navTemplate.content.cloneNode(true);
     this.append(content);
-
-    this.querySelector("#home").href = ROOT_PATH + "index.html";
-    this.querySelector("#about").href = ROOT_PATH + "about.html";
 
     const button = document.querySelector("#refresh-recipes");
     button.addEventListener("click", async () => {

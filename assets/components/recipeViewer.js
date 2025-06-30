@@ -1,23 +1,23 @@
 const template = document.createElement("template");
 template.innerHTML = `
   <header>
-    <h2>Name: <span id="recipe-name"></span></h2>
+    <h2>Name: <span data-field="strMeal"></span></h2>
     <h3>Origin:
-        <span id="recipe-area"></span>
+        <span data-field="strArea"></span>
     </h3>
-    <img id="recipe-image">
+    <img data-src="strMealThumb">
   </header>
 
   <article>
 
       <section class="ingredient-container">
         <h3> Instructions: </h3>
-        <p id="recipe-instructions"></p>  
+        <p data-field="strInstructions"></p>  
       </section>
 
       <section class="ingredient-container">
         <h3> Ingredients: </h3>
-        <ul id="recipe-ingredients"></ul>
+        <ul data-list="ingredients"></ul>
       </section>
 
       <section class="video-container">
@@ -33,11 +33,8 @@ class RecipeViewer extends HTMLElement {
   }
 
   connectedCallback() {
-    // Grab id param out of URL and set data-index
-    const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-
-    const recipe = JSON.parse(localStorage.getItem("recipes"))?.[id];
+    const recipeId = this.getAttribute("data-recipe-id");
+    const recipe = JSON.parse(localStorage.getItem("recipes"))?.[recipeId];
 
     if (!recipe) {
       this.innerHTML = "<p>Recipe not found</p>";
@@ -49,30 +46,32 @@ class RecipeViewer extends HTMLElement {
     this.appendChild(content);
 
     // Set the title of the page
-    document.title = recipe?.strMeal || `Recipe ${id}`;
+    // document.title = recipe?.strMeal || `Recipe ${id}`;
+    document.title = recipe?.strMeal || `Recipe ${recipeId}`;
 
     // Set all Elements to their values
-    this.querySelector("#recipe-name").textContent =
-      recipe?.strMeal || "name not found";
-    this.querySelector("#recipe-area").textContent =
-      recipe?.strArea || "Unkown";
-    this.querySelector("#recipe-image").src = recipe?.strMealThumb;
-    this.querySelector("#recipe-instructions").textContent =
-      recipe?.strInstructions || "Instructions not available";
+    this.querySelectorAll("[data-field]").forEach((el) => {
+      const field = el.dataset.field;
+      el.textContent = recipe?.[field] || "Not available";
+    });
+
+    // Set value for image
+    this.querySelectorAll("[data-src]").forEach((el) => {
+      const field = el.dataset.src;
+      if (el.tagName === "IMG") el.src = recipe?.[field] || "";
+    });
 
     // Get ingredients list
     const ingredients = this.getIngredients(recipe);
+    const ul = this.querySelector("[data-list='ingredients'");
     // Create the ingredients element
-    this.createIngredientsElement(
-      ingredients,
-      this.querySelector("#recipe-ingredients")
-    );
+    this.createIngredientsElement(ingredients, ul);
 
     // Create video element
     this.createVideoElement(recipe);
 
     /* DEBUG */
-    console.log(recipe);
+    // console.log(recipe);
   }
 
   // Grabs the ingredients and measurments and combines them into a object
@@ -112,7 +111,7 @@ class RecipeViewer extends HTMLElement {
   createIngredientsElement(ingredientList, ingredientElement) {
     for (const [key, value] of Object.entries(ingredientList)) {
       const li = document.createElement("li");
-      li.textContent = `${key} - ${value}`;
+      li.textContent = `${key} - ${value || "QTY not specified"}`;
       ingredientElement.appendChild(li);
     }
   }
@@ -177,7 +176,6 @@ class RecipeViewer extends HTMLElement {
 
   #createVideoErrorMessage(videoContainer, meal) {
     if (videoContainer) {
-      console.log("CONTAINER BAD");
       const videoErrMessage = document.createElement("p");
       videoErrMessage.textContent = `Video appears to be unavailable or deleted for ${meal}`;
       videoContainer?.appendChild(videoErrMessage);

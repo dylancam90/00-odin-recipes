@@ -1,8 +1,8 @@
 const cardTemplate = document.createElement("template");
 cardTemplate.innerHTML = `
   <div id="recipes-container">
-    <h3 id="recipe-name"></h3>
-    <img id="recipe-image"></img>
+    <h3 data-field="strMeal"></h3>
+    <img data-src="strMealThumb"></img>
     <h4>
       Ingredients:
       <span id="ingredient-count"></span>
@@ -16,8 +16,10 @@ class RecipeCard extends HTMLElement {
   }
 
   connectedCallback() {
-    const id = this.getAttribute("data-index");
-    const recipe = recipes[id];
+    const recipeId = this.getAttribute("data-recipe-id");
+    const recipe = recipes[recipeId];
+
+    console.log("RECIPES", recipe);
 
     if (!recipe) {
       this.innerHTML = "<p>No recipe found</p>";
@@ -28,16 +30,26 @@ class RecipeCard extends HTMLElement {
     const content = cardTemplate.content.cloneNode(true);
     this.appendChild(content);
 
+    // Fill in element text and other fields
+    this.querySelectorAll("[data-field], [data-src]").forEach((el) => {
+      const field = el.dataset.field;
+      const src = el.dataset.src;
+
+      if (field) {
+        el.textContent = recipe[field] ?? "Not available";
+      }
+
+      if (src) {
+        el.src = recipe[src] ?? "";
+      }
+    });
+
     // Incredient count
     const ingredientCount = this.getIngredientCount(recipe);
-
-    // Set recipe text
-    this.querySelector("#recipe-name").textContent = recipe?.strMeal;
-    this.querySelector("#recipe-image").src = recipe?.strMealThumb;
     this.querySelector("#ingredient-count").textContent = ingredientCount;
 
     // Create link to recipe page
-    this.createPageLink(id);
+    this.createPageLink(recipeId);
   }
 
   createPageLink(id) {

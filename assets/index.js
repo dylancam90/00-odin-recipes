@@ -6,7 +6,7 @@ function createLinks() {
   if (!isEmpty(recipes)) {
     recipes.forEach((recipe, index) => {
       const recipeCard = document.createElement("recipe-card");
-      recipeCard.setAttribute("data-index", index);
+      recipeCard.setAttribute("data-recipe-id", index);
       cardContainer.appendChild(recipeCard);
     });
   } else {

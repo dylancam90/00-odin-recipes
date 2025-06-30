@@ -20,6 +20,11 @@
       #recipes a {
         display: flex;
       }
+      ol {
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+      }
     </style>
   </head>
   <body>
@@ -31,11 +36,24 @@
         <h1>TODO -------------------------------------</h1>
         <ol>
           <li>
-            Add pagination links at the bottom of the page so if you wanted to
-            view the next recipe you dont need to naviagte home and look for the
-            next one
+            <code>
+              Refactor the rest of the components to use what more you've
+              learned. Use paginationLinks as reference. Also you may want to
+              move paginationLinks to the top of the page instead of the bottom.
+              This may be a good use case for &lt;slot&gt;&lt;slot&gt; so you
+              can decide where in recipeViewer you want it to go.
+            </code>
           </li>
-          <li>Styles also need to be added</li>
+          <li>
+            <code> Styles also need to be added </code>
+          </li>
+          <li>
+            <code>
+              this may be extra and you might want to move on by this point but
+              also think about using a admin portal to make changes directly to
+              the config file to get more recipes or change the refresh interval
+            </code>
+          </li>
         </ol>
       </section>
     </article>

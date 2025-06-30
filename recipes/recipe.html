@@ -10,11 +10,29 @@
       src="../assets/components/recipeNavbar.js"
     ></script>
     <script defer src="../assets/components/recipeViewer.js"></script>
+    <script
+      defer
+      type="module"
+      src="../assets/components/paginationLinks.js"
+    ></script>
 
     <title>Recipe</title>
   </head>
   <body>
     <recipe-navbar></recipe-navbar>
     <recipe-viewer></recipe-viewer>
+    <pagination-links></pagination-links>
   </body>
+  <script>
+    // Get recipe id from URL paramaters
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    const recipeViewer = document.querySelector("recipe-viewer");
+    const paginationLinks = document.querySelector("pagination-links");
+
+    // Pass along the recipe id to the 2 components
+    recipeViewer.setAttribute("data-recipe-id", id);
+    paginationLinks.setAttribute("data-recipe-id", id);
+  </script>
 </html>
