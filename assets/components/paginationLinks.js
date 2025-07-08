@@ -34,27 +34,6 @@ class PaginationLinks extends HTMLElement {
     this.shadowRoot
       .querySelector("#next-btn")
       ?.addEventListener("click", () => this.goToNext());
-    // this.shadowRoot.innerHTML = `
-    //   <style>${PaginationLinks.css}</style>
-    //   <ul id="pagination">
-    //     <button type="button"><</button>
-    //      ${Object.entries(this.recipes)
-    //        .map(
-    //          ([index, recipe]) => `
-    //           <li>
-    //             <a
-    //               href="${ROOT_PATH}recipes/recipe.html?id=${index}"
-    //               ${index === this.recipeId ? "class='current'" : ""}
-    //             >
-    //               ${Number(index) + 1}
-    //             </a>
-    //           </li>
-    //         `
-    //        )
-    //        .join("")}
-    //     <button type="button">></button>
-    //   </ul>
-    // `;
   }
 
   goToPrevious() {
