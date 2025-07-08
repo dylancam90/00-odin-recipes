@@ -70,7 +70,7 @@ async function main() {
     // If no cached recipes make a request for them and cache them
     if (!cachedRecipes) {
       console.log("No cached results, retrieving more...");
-      const recipes = await getRecipes(config?.recipeNum);
+      const recipes = await getRecipes(config?.recipeNum || 3);
       recipeCache.setData(recipes);
       cachedRecipes = recipes;
     } else {

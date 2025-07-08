@@ -1,13 +1,5 @@
 import { ROOT_PATH } from "../lib/queryRecipes.js";
 
-// const paginationTemplate = document.createElement("template");
-// paginationTemplate.innerHTML = `
-//   <style>${PaginationLinks.css}</style>
-//   <ul id="pagination">
-
-//   </ul>
-// `;
-
 class PaginationLinks extends HTMLElement {
   static css = `
     :root {
@@ -67,7 +59,6 @@ class PaginationLinks extends HTMLElement {
 
   goToPrevious() {
     if (this.currentIndex > 0) {
-      console.log("HELLO");
       const newIndex = this.currentIndex - 1;
       window.location.href = `${ROOT_PATH}recipes/recipe.html?id=${newIndex}`;
     }
