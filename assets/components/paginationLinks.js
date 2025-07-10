@@ -52,28 +52,68 @@ class PaginationLinks extends HTMLElement {
     }
   }
 
+  /*
+   *    This handles the logic of how the pagination is rendered based on the current index
+   *    and the number of total recipes. It was modeled after:
+   *                  https://mui.com/material-ui/react-pagination/
+   *
+   *    There are still some minor things that could be refined but for now it will work.
+   */
+  #generatePagination(currentIndex, total) {
+    const pages = [];
+    const maxSlide = 5;
+
+    if (total <= maxSlide) {
+      for (let i = 0; i < total; i++) {
+        pages.push(i);
+      }
+    } else if (currentIndex <= 3) {
+      for (let i = 0; i <= 4; i++) {
+        pages.push(i);
+      }
+      pages.push("...", total - 1);
+    } else if (currentIndex >= total - 4) {
+      pages.push(0, "...");
+      for (let i = total - maxSlide; i < total; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(0, "...");
+      pages.push(currentIndex - 1, currentIndex, currentIndex + 1);
+      pages.push("...", total - 1);
+    }
+
+    return pages;
+  }
+
   render() {
+    const total = Object.keys(this.recipes).length;
+    const paginationItems = this.#generatePagination(this.currentIndex, total);
+    // Generate template based on paginatonItems
+    const listItems = paginationItems
+      .map((item) => {
+        if (item === "...") {
+          return `<li><span>...</span></li>`;
+        }
+
+        const pageNum = item + 1;
+        const isCurrent = item === this.currentIndex ? "class='current'" : "";
+        return `
+        <li>
+          <a href="${ROOT_PATH}recipes/recipe.html?id=${item}" ${isCurrent}>${pageNum}</a>
+        </li>
+      `;
+      })
+      .join("");
+
     this.shadowRoot.innerHTML = `
-    <style>${PaginationLinks.css}</style>
-    <ul id="pagination">
-      <button id="prev-btn" type="button">&lt;</button>
-       ${Object.entries(this.recipes)
-         .map(
-           ([index, recipe]) => `
-            <li>
-              <a 
-                href="${ROOT_PATH}recipes/recipe.html?id=${index}"
-                ${Number(index) === this.currentIndex ? "class='current'" : ""}
-              >
-                ${Number(index) + 1}
-              </a>
-            </li>
-          `
-         )
-         .join("")}
-      <button id="next-btn" type="button">&gt;</button>
-    </ul>
-  `;
+      <style>${PaginationLinks.css}</style>
+      <ul id="pagination">
+        <button id="prev-btn" type="button">&lt;</button>
+          ${listItems}
+        <button id="next-btn" type="button">&gt;</button>
+      </ul>
+    `;
   }
 }
 
