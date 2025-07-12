@@ -1,8 +1,25 @@
+/* ALWAYS REMEMBER TO INCLUDE .JS IN MODULES!!! THE INTELLISENSE ALWAYS LETS YOU DOWN */
+import { ROOT_PATH } from "../lib/queryRecipes.js";
+
 class RecipeViewer extends HTMLElement {
   constructor() {
     super();
-    this.recipeId = this.getAttribute("data-recipe-id");
-    this.recipe = JSON.parse(localStorage.getItem("recipes"))?.[this.recipeId];
+    this.recipeId = Number(this.getAttribute("data-recipe-id"));
+    this.recipes = JSON.parse(localStorage.getItem("recipes")) || {};
+    this.recipeLen = Object.entries(this.recipes).length;
+
+    // Checks to see if the recipe ID is out of index and if it is changes the location
+    if (
+      isNaN(this.recipeId) ||
+      this.recipeId < 0 ||
+      this.recipeId + 1 > this.recipeLen
+    ) {
+      window.location.href =
+        ROOT_PATH + `recipes/recipe.html?id=${this.recipeLen - 1}`;
+      console.log("There was a problem with recipeId in recipeViewer.js");
+    }
+
+    this.recipe = this.recipes?.[this.recipeId];
     this.ingredients = this.#extractIngredients(this.recipe);
 
     this.VIDEO_WIDTH = 580;
@@ -10,12 +27,19 @@ class RecipeViewer extends HTMLElement {
   }
 
   async connectedCallback() {
+    // Set the title of the document
     document.title = this.recipe?.strMeal || `Recipe ${this.recipeId}`;
+
+    // Render the component
     await this.render();
   }
 
   // Grabs the ingredients and measurments and combines them into a object
   #extractIngredients(recipe) {
+    if (!recipe) {
+      return {};
+    }
+
     const ingrediemntRegex = new RegExp(/^strIngredient\d+$/);
     const measuringsRegex = new RegExp(/^strMeasure\d+$/);
 
