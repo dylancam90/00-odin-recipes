@@ -9,7 +9,7 @@ First I have a script that querys the API and stores the response in localStorag
 
 ## Other Features
 
-The recipes automatically refresh after 10 minutes and both the recipe quantity and the refresh interval can be changed in the config.js file. I am working on being able to change these directly from the website.
+I added a config route where you can change both the number of recipes queried and the refresh interval for you to play around with. The API is not mine and you may get rate limited if you try and abuse it. I have a max number that's set but anyone who knows what they're doing can figure out a way around that quickly. I don't know why you'd want to do that though. Just know it's not something that'll stress me out. Just make sure you run it in your localhost so it works ;)
 
 ## How to use
 

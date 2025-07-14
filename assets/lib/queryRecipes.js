@@ -4,7 +4,7 @@ import { loadConfig } from "./loadConfig.js";
 const ROOT_PATH = "http://localhost:5500/projects/00-odin-recipes/";
 const API_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
 
-const config = await loadConfig(ROOT_PATH + "assets/config.json");
+const config = await loadConfig(ROOT_PATH + "config.json");
 console.log("Config options: ", config);
 
 const recipeCache = new Cache(config?.recipeRefreshIntervalMs);
@@ -68,7 +68,11 @@ async function main() {
     let cachedRecipes = recipeCache.getData();
 
     // If no cached recipes make a request for them and cache them
-    if (!cachedRecipes) {
+    if (
+      !cachedRecipes ||
+      (config?.recipeNum !== Object.entries(cachedRecipes).length) !==
+        config?.recipeNum
+    ) {
       console.log("No cached results, retrieving more...");
       const recipes = await getRecipes(config?.recipeNum || 3);
       recipeCache.setData(recipes);
@@ -83,4 +87,4 @@ async function main() {
 
 main();
 
-export { recipeCache, getRecipes, ROOT_PATH };
+export { recipeCache, getRecipes, ROOT_PATH, config };

@@ -19,6 +19,3 @@ function isEmpty(obj) {
 }
 
 createLinks();
-
-const paginationLinks = document.querySelector("pagination-links");
-console.log(paginationLinks);

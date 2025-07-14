@@ -7,7 +7,11 @@
     <!-- MODULE -->
     <script type="module" defer src="./assets/lib/queryRecipes.js"></script>
     <!-- Components -->
-    <script defer src="./assets/components/recipeViewer.js"></script>
+    <script
+      defer
+      type="module"
+      src="./assets/components/recipeViewer.js"
+    ></script>
     <script defer src="./assets/components/recipeCard.js"></script>
     <script
       type="module"
@@ -36,34 +40,32 @@
         <h1>TODO -------------------------------------</h1>
         <ol>
           <li>
-            <code>
-              UPDATE: IF YOU ONLY USE 10 CARDS YOU SHOULD BE ABLE TO FIT ALL OF
-              THEM ON THE PAGE WITHOUT PAGINATION OR PAGINATION LINKS
-              -------------------- Since there are more recipeCards on the
-              index.html page you will have to retrofit the paginationLinks
-              component to handle the recipe cards
-            </code>
-          </li>
-          <li>
-            <code>
-              You may want to consider moving paginationLinks to the top of the
-              page instead of the bottom. This may be a good use case for
-              &lt;slot&gt;&lt;slot&gt; so you can decide where in recipeViewer
-              you want it to go.
-            </code>
-          </li>
-          <li>
-            <code>
-              This may be extra and you might want to move on by this point but
-              also think about using a admin portal to make changes directly to
-              the config file to get more recipes or change the refresh interval
-            </code>
-          </li>
-          <li>
             <code> Styles also need to be added </code>
           </li>
-          <li><code> Write tests </code></li>
+          <li><code> Write tests! </code></li>
+          <li>
+            <code>
+              Go through code and add comments and remove anything else not
+              ready for production.
+            </code>
+          </li>
           <li><code>Deploy to github pages</code></li>
+        </ol>
+      </section>
+
+      <section class="notes">
+        <h1>NOTES -------------------------</h1>
+        <ol>
+          <li>
+            <code
+              >Since the config.html page was added the website doesn't run
+              directly on config.json. For the first time it will use its values
+              but after that there will be fields in local storage under
+              "config" that can be changed by whoever uses it. config.json is
+              more of a guide for the first time it runs instead of persistent
+              values, which I'm okay with.
+            </code>
+          </li>
         </ol>
       </section>
     </article>
