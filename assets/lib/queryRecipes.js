@@ -4,7 +4,7 @@ import { loadConfig } from "./loadConfig.js";
 const ROOT_PATH = "http://localhost:5500/projects/00-odin-recipes/";
 const API_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
 
-const config = await loadConfig(ROOT_PATH + "config.json");
+const config = await loadConfig(ROOT_PATH + "assets/config.json");
 console.log("Config options: ", config);
 
 const recipeCache = new Cache(config?.recipeRefreshIntervalMs);
