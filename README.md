@@ -17,6 +17,4 @@ Download the project using git clone
 
 `git clone https://github.com/dylancam90/00-odin-recipes`
 
-You can open the index.html file direcly in the browser.
-
-This is a static site and there is nothing to build (for now). I plan to host this at some point on Github pages
+You can open the index.html file direcly in the browser or go to https://dylancam90.github.io/00-odin-recipes/
