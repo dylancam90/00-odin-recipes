@@ -15,6 +15,7 @@ async function requestRecipe() {
     const response = await fetch(API_URL);
 
     if (!response.ok) {
+      console.log("BAD REQUEST");
       throw new Error(
         `API returned status ${response.status}, debug trace: requestRecipe()`
       );
@@ -68,11 +69,7 @@ async function main() {
     let cachedRecipes = recipeCache.getData();
 
     // If no cached recipes make a request for them and cache them
-    if (
-      !cachedRecipes ||
-      (config?.recipeNum !== Object.entries(cachedRecipes).length) !==
-        config?.recipeNum
-    ) {
+    if (!cachedRecipes || Object.entries(cachedRecipes).length === 0) {
       console.log("No cached results, retrieving more...");
       const recipes = await getRecipes(config?.recipeNum || 3);
       recipeCache.setData(recipes);
@@ -87,4 +84,4 @@ async function main() {
 
 main();
 
-export { recipeCache, getRecipes, ROOT_PATH, config };
+export { recipeCache, getRecipes, ROOT_PATH, config, main };

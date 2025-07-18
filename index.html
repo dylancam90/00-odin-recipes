@@ -3,9 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script defer src="./assets/index.js"></script>
+    <!-- NATIVE .JS File -->
+    <!-- <script defer src="./assets/index.js"></script> -->
+    <script defer type="module" src="./assets/index.js"></script>
     <!-- MODULE -->
-    <script type="module" defer src="./assets/lib/queryRecipes.js"></script>
+    <script defer type="module" src="./assets/lib/queryRecipes.js"></script>
     <!-- Components -->
     <script
       defer
@@ -40,15 +42,17 @@
         <h1>TODO -------------------------------------</h1>
         <ol>
           <li>
+            <code>
+              When the website first loads it doesnt display anything because
+              index.js loads before the query happens. In Index.js add error
+              checking in createLinks(). ALSO THE INTERVAL NO LONGER WORKS! The
+              recipes are refreshed on page load!
+            </code>
+          </li>
+          <li>
             <code> Styles also need to be added </code>
           </li>
           <li><code> Write tests! </code></li>
-          <li>
-            <code>
-              Go through code and add comments and remove anything else not
-              ready for production.
-            </code>
-          </li>
           <li><code>Deploy to github pages</code></li>
         </ol>
       </section>
@@ -56,6 +60,18 @@
       <section class="notes">
         <h1>NOTES -------------------------</h1>
         <ol>
+          <li>
+            <code>
+              This project is not hosted on
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://dylancam90.github.io/00-odin-recipes/"
+                >Github Pages</a
+              >
+            </code>
+          </li>
+
           <li>
             <code
               >Since the config.html page was added the website doesn't run

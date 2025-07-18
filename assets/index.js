@@ -1,21 +1,21 @@
-const recipes = JSON.parse(localStorage.getItem("recipes"));
+import { waitForRecipes } from "./lib/helpers.js";
+
 const cardContainer = document.querySelector("#recipes");
 
-function createLinks() {
-  // console.log(recipes);
-  if (!isEmpty(recipes)) {
+async function createLinks() {
+  try {
+    const recipes = await waitForRecipes();
     recipes.forEach((recipe, index) => {
       const recipeCard = document.createElement("recipe-card");
+      // DEBUG
+      recipeCard.recipe = recipe;
+      // DEBUG
       recipeCard.setAttribute("data-recipe-id", index);
       cardContainer.appendChild(recipeCard);
     });
-  } else {
-    // Handle case where recipes are empty
+  } catch (error) {
+    console.error(error);
   }
 }
 
-function isEmpty(obj) {
-  return Object.keys(obj).length === 0;
-}
-
-createLinks();
+window.onload = createLinks();

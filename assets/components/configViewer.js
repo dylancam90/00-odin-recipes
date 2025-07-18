@@ -1,4 +1,10 @@
-import { config, ROOT_PATH } from "../lib/queryRecipes.js";
+import { loadConfig } from "../lib/loadConfig.js";
+import {
+  config,
+  getRecipes,
+  recipeCache,
+  ROOT_PATH,
+} from "../lib/queryRecipes.js";
 
 class ConfigViewer extends HTMLElement {
   constructor() {
@@ -15,9 +21,12 @@ class ConfigViewer extends HTMLElement {
     const form = this.querySelector("#config-form");
     const status = this.querySelector("#save-status");
 
-    form?.addEventListener("submit", (e) => {
+    form?.addEventListener("submit", async (e) => {
       e.preventDefault();
       const formData = new FormData(form);
+      const configRecipeNum = config?.recipeNum;
+
+      console.log(configRecipeNum);
 
       const recipeNum = Number(formData.get("recipeNum"));
       const recipeIntervalMin = Number(formData.get("recipeRefreshIntervalMs"));
@@ -33,20 +42,22 @@ class ConfigViewer extends HTMLElement {
       localStorage.removeItem("config");
       localStorage.setItem("config", JSON.stringify(updatedConfig));
 
+      if (recipeNum != configRecipeNum) {
+        // Reload recipes
+        const newConfig = await loadConfig();
+        const newRecipes = await getRecipes(newConfig?.recipeNum);
+        recipeCache.setData(newRecipes);
+      }
+
+      const homePath = ROOT_PATH + "index.html";
+      console.log(homePath);
+
       status.innerHTML = `
         Config successfully updated, go 
-        <a href="${ROOT_PATH}/index.html">
+        <a href="${homePath}">
           Home?
         </a>
       `;
-      /* DEBUG */
-      // console.log(
-      //   "Form data in min: ",
-      //   recipeIntervalMin,
-      //   "\tConversion back to ms: ",
-      //   recipeIntervalMs
-      // );
-      // console.log("Recipe Num: ", recipeNum);
     });
   }
 
@@ -59,8 +70,6 @@ class ConfigViewer extends HTMLElement {
   }
 
   render() {
-    console.log(this.#milliToMin(this.config?.recipeRefreshIntervalMs));
-
     this.innerHTML = `
       ${
         !this.config
@@ -99,7 +108,5 @@ class ConfigViewer extends HTMLElement {
     `;
   }
 }
-
-// value = "${this.config?.recipeRefreshIntervalMs}";
 
 customElements.define("config-viewer", ConfigViewer);

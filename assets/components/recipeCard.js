@@ -2,12 +2,15 @@ class RecipeCard extends HTMLElement {
   constructor() {
     super();
     this.recipeId = this.getAttribute("data-recipe-id");
-    this.recipe = JSON.parse(localStorage.getItem("recipes"))?.[this.recipeId];
     this.recipeHref = "recipes/recipe.html?id=" + this.recipeId;
   }
 
-  connectedCallback() {
-    this.render();
+  async connectedCallback() {
+    if (this.recipe) {
+      this.render();
+    } else {
+      this.innerHTML = "<p>Loading recipe...</p>";
+    }
   }
 
   #getIngredientCount(recipe) {

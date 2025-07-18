@@ -3,7 +3,6 @@ export async function loadConfig(path) {
   const localConfig = JSON.parse(localStorage.getItem("config"));
 
   if (localConfig) {
-    console.log("Local Config exists ", localConfig);
     return localConfig;
   }
 
