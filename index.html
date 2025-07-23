@@ -44,10 +44,14 @@
         <ol>
           <li>
             <code>
-              When the website first loads it doesnt display anything because
-              index.js loads before the query happens. In Index.js add error
-              checking in createLinks(). ALSO THE INTERVAL NO LONGER WORKS! The
-              recipes are refreshed on page load!
+              I fixed an issue where a recipe would be duplicated for every
+              entry in localstorage after the tab had been opened for some time.
+              Make sure that still doesnt happen. Also, adding a pagination for
+              the front page and removing the max number of recipes queried
+              might be a good idea depending on what the styling looks like
+              later on. Finally the bug where index was rendering before
+              localhost was being populated seems to be fixed but may require
+              more testing.
             </code>
           </li>
           <li>
