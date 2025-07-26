@@ -15,6 +15,7 @@ export class Cache {
   isValid() {
     const timestamp = localStorage.getItem("recipes_timestamp");
     const isValid = timestamp && Date.now() - Number(timestamp) < this.duration;
+    console.log("Is data valid?", isValid);
     return isValid;
   }
 
@@ -22,6 +23,7 @@ export class Cache {
   getData() {
     if (!this.isValid()) return null;
     const json = localStorage.getItem("recipes");
+    console.log("ITEMS IN LOCALSTORAGE", JSON.parse(json));
     return json ? JSON.parse(json) : null;
   }
 
