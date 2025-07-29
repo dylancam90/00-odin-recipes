@@ -1,5 +1,6 @@
 import { Cache } from "./cache.js";
 import { loadConfig } from "./loadConfig.js";
+import { foundDuplicates } from "../lib/helpers.js";
 
 const ROOT_PATH = "http://localhost:5500/projects/00-odin-recipes/";
 const API_URL = "https://www.themealdb.com/api/json/v1/1/random.php";
@@ -63,19 +64,19 @@ async function getRecipes(recipeNum = 3) {
 }
 
 // Temp function until I can figure out whats going on
-function foundDuplicates(recipes) {
-  if (!recipes) return false;
+// function foundDuplicates(recipes) {
+//   if (!recipes) return false;
 
-  const ids = new Set();
+//   const ids = new Set();
 
-  for (const recipe of recipes) {
-    if (!recipe?.idMeal) continue;
-    if (ids.has(recipe?.idMeal)) return true;
-    ids.add(recipe.idMeal);
-  }
+//   for (const recipe of recipes) {
+//     if (!recipe?.idMeal) continue;
+//     if (ids.has(recipe?.idMeal)) return true;
+//     ids.add(recipe.idMeal);
+//   }
 
-  return false;
-}
+//   return false;
+// }
 
 async function main() {
   try {

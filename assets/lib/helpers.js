@@ -18,6 +18,20 @@ export async function waitForRecipes(timeout = 5000) {
   });
 }
 
+export function foundDuplicates(recipes) {
+  if (!recipes) return false;
+
+  const ids = new Set();
+
+  for (const recipe of recipes) {
+    if (!recipe?.idMeal) continue;
+    if (ids.has(recipe?.idMeal)) return true;
+    ids.add(recipe.idMeal);
+  }
+
+  return false;
+}
+
 function isEmpty(obj) {
   return !obj || Object.keys(obj).length === 0;
 }

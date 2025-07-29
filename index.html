@@ -3,6 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Odin Recipes</title>
+    <!-- FAVICON -->
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+    <!-- STYLES -->
+    <link rel="stylesheet" href="./assets/global.css" />
+
     <!-- NATIVE .JS File -->
     <!-- <script defer src="./assets/index.js"></script> -->
     <script defer type="module" src="./assets/index.js"></script>
@@ -20,19 +26,6 @@
       defer
       src="./assets/components/recipeNavbar.js"
     ></script>
-
-    <title>Odin Recipes</title>
-    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
-    <style>
-      #recipes a {
-        display: flex;
-      }
-      ol {
-        display: flex;
-        gap: 10px;
-        flex-direction: column;
-      }
-    </style>
   </head>
   <body>
     <recipe-navbar></recipe-navbar>
@@ -44,6 +37,10 @@
         <ol>
           <li>
             <code>
+              I added a window.location.reload in queryRecipes that reloads the
+              page if no cached results exist you may need to switch to session
+              storage if problem persists. It may be that im setting
+              recipeCard.recipe in index.js??? <br />
               ----- MY DUPLICATE FIX DIDNT WORK ------- I fixed an issue where a
               recipe would be duplicated for every entry in localstorage after
               the tab had been opened for some time. Make sure that still doesnt

@@ -1,0 +1,158 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  --navbar-height: 70px;
+  --dropdown-pad: 2vw 1vw;
+}
+
+nav {
+  background-color: red;
+  display: flex;
+  width: 100%;
+
+  height: var(--navbar-height);
+
+  justify-content: space-between;
+  margin-bottom: 2vw;
+}
+
+button {
+  border: none;
+  padding: 0.5em;
+  border-radius: 5px;
+}
+
+a:visited,
+a:link,
+a:hover,
+a:active {
+  /* text-decoration: none; */
+  text-decoration: wavy;
+  color: black;
+}
+
+/* 
+*  
+*   recipeNavabar.js
+*
+*/
+
+.nav-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0.5em;
+  background-color: blue;
+}
+
+.dropdown,
+.nav-links {
+  list-style: none;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border: 1px solid green;
+  width: 50%;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.refresh-btn {
+  width: 150px;
+  /* display: inline-block;
+  margin: auto 0; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img {
+  width: 200px;
+  height: auto;
+}
+
+.hamburger {
+  display: none;
+  font-size: 1rem;
+  /* background: none;
+  border: none; */
+  cursor: pointer;
+}
+.dropdown {
+  display: none;
+}
+
+/* TODO/NOTES */
+.todo,
+.notes {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+}
+
+.todo ol,
+.notes ol {
+  margin: 10px;
+}
+
+.notes li,
+.todo li {
+  padding: 5px;
+}
+
+/* MOBILE STYLES */
+@media (max-width: 760px) {
+  .hamburger {
+    display: block;
+    margin-right: 20px;
+  }
+  div:has(.hamburger) {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 200px;
+    background-color: green;
+  }
+  .nav-links,
+  .refresh-btn {
+    display: none;
+  }
+  .dropdown.open {
+    display: block;
+    position: absolute;
+    top: var(--navbar-height);
+    left: 0;
+
+    width: 100%;
+    height: auto;
+    padding: var(--dropdown-pad);
+    background-color: red;
+  }
+
+  .nav-links-mobile {
+    padding: 2vw 1vw;
+  }
+  .nav-btn-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2vw;
+  }
+
+  .nav-links-mobile li {
+    font-size: large;
+    background-color: yellow;
+    margin: 2vw 0;
+  }
+  .nav-btn-mobile button {
+    width: 100%;
+    font-size: large;
+  }
+}
